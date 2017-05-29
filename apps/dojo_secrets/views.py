@@ -48,7 +48,7 @@ def secrets(request):
     return redirect('/')
 
 def popular(request):
-    if request.session['user_id']:
+    if 'user_id' in request.session:
         user=User.objects.findUser(request.session)
         most_popular=Secret.objects.annotate(like_count=Count('likes')).order_by('-like_count')[:5]
         context={'most_popular': most_popular, 'user': user}
