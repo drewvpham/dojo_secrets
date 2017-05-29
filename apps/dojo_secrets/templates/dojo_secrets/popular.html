@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>Most Popular Secrets...</h1>
+
+    {%for secret in most_popular%}
+    <p>{{secret.content}}  {{secret.created_at}}
+
+    {%if secret.likes.all.count == 1%}
+        This post has {{secret.likes.all.count}} like.
+    {%else%}
+        This post has {{secret.likes.all.count}} likes.
+    {%endif%}
+
+    {%if user not in secret.likes.all%}
+      <a href='/like/{{secret.id}}'>Like</a>
+    {%else%}
+      <a href='/unlike/{{secret.id}}'>Unlike</a>
+    {%endif%}
+
+    {%if user.id == secret.user.id%}
+      <a href='/delete/{{secret.id}}'>Delete</a>
+
+    {%endif%}
+  {%endfor%}
+
+
+  </body>
+</html>
