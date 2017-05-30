@@ -48,6 +48,7 @@ class UserManager(models.Manager):
         errors = []
         result = {"pass": True}
         user = User.objects.filter(email = form_data['email']).first()
+        print user
         if user:
             password = form_data['password'].encode()
             user_pass = user.password.encode()
